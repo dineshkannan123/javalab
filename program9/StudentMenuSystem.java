@@ -1,74 +1,4 @@
-import java.util.Scanner; 
-import java.util.Vector; 
-import java.util.Hashtable; 
-import java.util.Iterator; 
-/** 
-* Represents a Student with registration number, name, and marks. 
-* Demonstrates OOP concepts and uses Hashtable for subject → marks mapping. 
-*/ 
-class Student { 
-int regNo; 
-String name; 
-Hashtable<String, Integer> marks; 
-/** 
-* Constructs a Student object with registration number and name. 
-* Initializes the marks Hashtable. 
-* 
-* @param regNo registration number of the student 
-* @param name  name of the student 
-*/ 
-Student(int regNo, String name) { 
-this.regNo = regNo; 
-this.name = name; 
-marks = new Hashtable<>(); 
-} 
-/** 
-* Adds a subject and its marks to the student's record. 
-* 
-* @param subject name of the subject 
-* @param mark    marks obtained in the subject 
-* @throws IllegalArgumentException if mark is negative or greater than 100 
-*/ 
-void addMarks(String subject, int mark) throws IllegalArgumentException { 
-if (mark < 0 || mark > 100) { 
-throw new IllegalArgumentException("Mark must be between 0 and 100."); 
-} 
-marks.put(subject, mark); 
-} 
-/** 
-* Calculates the average marks of the student. 
-     * 
-     * @return average of all marks as double 
-     */ 
-    double calculateAverage() { 
-        int sum = 0; 
-        for (int m : marks.values()) { 
-            sum += m; 
-        } 
-        return marks.size() == 0 ? 0.0 : (double) sum / marks.size(); 
-    } 
- 
-    /** 
-     * Displays student details including registration number, name, subjects, and average marks. 
-     */ 
-    void display() { 
-        System.out.println("RegNo: " + regNo); 
-        System.out.println("Name: " + name); 
-        System.out.println("Marks: " + marks); 
-        System.out.println("Average: " + calculateAverage()); 
-        System.out.println("----------------------"); 
-    } 
-} 
- 
-/** 
- * Menu-driven Student Management System. 
- * Features: 
- * - Register new student 
- * - Add marks 
- * - Search student by registration number 
- * - Display all students 
- * - Unregister student 
- */ 
+import java.util.*;
 public class StudentMenuSystem { 
  
     /** 
@@ -84,8 +14,8 @@ public class StudentMenuSystem {
                 return s; 
             } 
         } 
-        return null; 
-    } 
+        return null;
+ } 
  
     /** 
      * Main method for the menu-driven Student Management System. 
@@ -95,6 +25,7 @@ unregister, and exit.
      * @param args command-line arguments 
      * @throws IllegalArgumentException if marks entered are invalid 
      */ 
+
     public static void main(String[] args) throws IllegalArgumentException { 
         Scanner sc = new Scanner(System.in); 
         Vector<Student> students = new Vector<>(); 
@@ -112,12 +43,13 @@ unregister, and exit.
             choice = sc.nextInt(); 
             sc.nextLine(); // consume newline 
  
-            switch (choice) { 
-                case 1: 
+  switch (choice) { 
+     case 1: 
                     // Register new student 
                     System.out.print("Enter RegNo: "); 
                     int regNo = sc.nextInt(); 
                     sc.nextLine(); 
+
                     System.out.print("Enter Name: "); 
                     String name = sc.nextLine(); 
  
@@ -127,9 +59,9 @@ unregister, and exit.
                         students.add(new Student(regNo, name)); 
                         System.out.println("Student registered successfully."); 
                     } 
-                    break; 
- 
-                case 2: 
+                    break;
+
+ case 2: 
                     // Add marks 
                     System.out.print("Enter RegNo to add marks: "); 
                     int regSearch = sc.nextInt(); 
@@ -175,30 +107,31 @@ unregister, and exit.
                         Iterator<Student> it = students.iterator(); 
                         while (it.hasNext()) { 
                             Student st = it.next(); 
-st.display(); 
-} 
-} 
-break; 
-case 5: 
-// Unregister student 
-System.out.print("Enter RegNo to unregister: "); 
-int delReg = sc.nextInt(); 
-sc.nextLine(); 
-Student removeStu = searchStudent(students, delReg); 
-if (removeStu != null) { 
-students.remove(removeStu); 
-System.out.println("Student unregistered successfully."); 
-} else { 
-System.out.println("Student not found!"); 
-} 
-break; 
-case 6: 
-System.out.println("Exiting program..."); 
-break; 
-default: 
-System.out.println("Invalid choice! Try again."); 
-} 
-} while (choice != 6); 
-sc.close(); 
-} 
-} 
+                  st.display(); 
+                  } 
+                } 
+                break; 
+            case 5: 
+                 // Unregister student 
+                 System.out.print("Enter RegNo to unregister: "); 
+                 int delReg = sc.nextInt(); 
+                 sc.nextLine(); 
+                 Student removeStu = searchStudent(students, delReg); 
+                 if (removeStu != null) { 
+                 students.remove(removeStu); 
+                 System.out.println("Student unregistered successfully."); 
+                 } else { 
+                 System.out.println("Student not found!"); 
+                 } 
+                 break; 
+            case 6: 
+                 System.out.println("Exiting program..."); 
+                 break; 
+            default: 
+                 System.out.println("Invalid choice! Try again."); 
+                 } 
+                 } while (choice != 6); 
+                 sc.close(); 
+                 }
+                 }
+
